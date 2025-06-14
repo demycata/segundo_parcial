@@ -1,0 +1,4 @@
+# Game Settings
+
+SCREENWIDTH = 800
+SCREENHEIGHT = 600
