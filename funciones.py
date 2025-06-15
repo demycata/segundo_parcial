@@ -56,7 +56,7 @@ def generar_barcos(grid, cord, barco, cant, dificultad, barcos, COLS, ROWS):
         barco_dic = {}
         cords = cords_barco(grid, barco, cord, COLS, ROWS)
         barco_dic['Cordenadas'] = cords
-        barco_dic['Tam'] = 'x'+str(barco)
+        barco_dic['Tam'] = barco
         barco_dic['Vida'] = barco
         print(barco_dic)
         barcos.append(barco_dic)
@@ -118,12 +118,21 @@ def verificar_disparo(cord, posi, celdas_ya_disparadas, barcos, CELLSIZE, grid):
      
     return impacto
 
-def verificar_estado_partida(barcos):
+def verificar_vida_barcos(barcos):
     """
     Verifica si la partida ha terminado.
     Retorna True si todos los barcos han sido hundidos, False en caso contrario.
     """
+    puntos = 0
     for barco in barcos:
-        if barco['Vida'] > 0:
-            return False
-    return True
+        if barco['Vida'] <= 0:
+            puntos += barco['Tam'] * 10
+            barcos.remove(barco) 
+    return puntos
+
+def verificar_estado_partida(barcos):
+    end = False
+    if len(barcos) == 0:
+        end = True
+    return end
+    
