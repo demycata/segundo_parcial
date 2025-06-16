@@ -3,6 +3,33 @@ import pygame as pg
 
 import random
 
+def inicializar_matriz(cantidad_filas:int, cantidad_columnas:int, valor_inicial:any) -> list:
+    '''
+    Función para inicializar una matriz con un valor inicial.
+    Args:
+        cantidad_filas: int: Cantidad de filas de la matriz.
+        cantidad_columnas: int: Cantidad de columnas de la matriz.
+        valor_inicial: str | int: Valor inicial con el que se llenará la matriz.
+    Returns:
+        list: Matriz inicializada con el valor inicial.
+    '''
+    matriz = []
+    for i in range(cantidad_filas):
+        fila = [valor_inicial] * cantidad_columnas
+        matriz += [fila]
+    return matriz
+
+def mostrar_matriz(matriz:list) -> None:
+    """
+    Función para mostrar una matriz en la consola.
+    Args:
+        matriz: list: Matriz a mostrar.
+    """
+    for i in range(len(matriz)):
+        for j in range(len(matriz[i])):
+            print(matriz[i][j], end = " ")
+        print("")
+
 def generar_cordenas(grid, CELLSIZE):
     cord = []
     start_x = 192
@@ -16,17 +43,18 @@ def generar_cordenas(grid, CELLSIZE):
         cord.append(fila)
     return cord
 
-def dibujar_Grilla(display, cellsize, grid, celdas_ya_disparadas):
+def dibujar_Grilla(display, cellsize, grid, celdas_ya_disparadas, celdas_acertadas):
     """Dibuja solo la cuadrícula del jugador en la pantalla"""
-
     start_x = 192
     start_y = 76
     for i in range(len(grid)):
         for j in range(len(grid[i])):
             pos_x = start_x + j * cellsize
             pos_y = start_y + i * cellsize
-            if (pos_x, pos_y) in celdas_ya_disparadas: # ROJO si ya estan disparadas
+            if (pos_x, pos_y) in celdas_acertadas: # ROJO si ya estan disparadas
                 pg.draw.rect(display, 'red', (pos_x, pos_y, cellsize, cellsize), 1)
+            elif (pos_x, pos_y) in celdas_ya_disparadas: # AZUL si ya estan disparadas
+                pg.draw.rect(display, 'blue', (pos_x, pos_y , cellsize, cellsize), 1)
             else:   # si no las pone en blanco
                 pg.draw.rect(display, 'green', (pos_x, pos_y, cellsize, cellsize), 1)
 
@@ -62,6 +90,8 @@ def generar_barcos(grid, cord, barco, cant, dificultad, barcos, COLS, ROWS):
         barcos.append(barco_dic)
 
 def poner_barcos(dificultad, COLS, ROWS, grid, cord):
+    if dificultad == 4:
+        dificultad = 3
     barcos = []
     # CANTIDAD DE CASILLAS QUE OCUPAN
     submarionos = 1
@@ -89,11 +119,12 @@ def verifica_espacio_libre(tam_barco, grid, col_inicio, fila):
                 break
         return espacio_libre
 
-def verificar_disparo_barco(x_y, barcos, grid, cord):
+def verificar_disparo_barco(x_y, barcos, grid, cord, celdas_acertadas):
     impacto = False
     for barco in barcos:
         if x_y in barco['Cordenadas'] and barco['Vida'] > 0:
             print("¡El mouse está dentro de esta celda!")
+            celdas_acertadas.append(x_y)
             impacto = True
             for i in range(len(grid)):              #esto hace cambio el 1 del grid a 0 si toca la celda
                 for x in range(len(grid[i])):
@@ -102,7 +133,7 @@ def verificar_disparo_barco(x_y, barcos, grid, cord):
             barco['Vida'] -= 1
     return impacto
 
-def verificar_disparo(cord, posi, celdas_ya_disparadas, barcos, CELLSIZE, grid):
+def verificar_disparo(cord, posi, celdas_ya_disparadas, barcos, CELLSIZE, grid, celdas_acertadas):
     impacto = None
     for i in cord:
         for x_y in i: # cada celda es (x, y)
@@ -110,7 +141,7 @@ def verificar_disparo(cord, posi, celdas_ya_disparadas, barcos, CELLSIZE, grid):
             if rect.collidepoint(posi):
                 impacto = None
                 if x_y not in celdas_ya_disparadas:
-                    impacto = verificar_disparo_barco(x_y, barcos, grid, cord,)
+                    impacto = verificar_disparo_barco(x_y, barcos, grid, cord, celdas_acertadas)
                     celdas_ya_disparadas.append(x_y)
                 elif x_y in celdas_ya_disparadas:
                     print('Ya disparaste')  
@@ -136,3 +167,25 @@ def verificar_estado_partida(barcos):
         end = True
     return end
     
+def transicion_get_ready(screen):
+    from assets import background
+    fade = pg.Surface((1000, 1000))
+    fade.fill((0, 0, 0))
+    for alpha in range(0, 255, 10):
+        fade.set_alpha(alpha)
+        screen.blit(background, (0, 0))
+        screen.blit(fade, (0, 0))
+        pg.display.update()
+        pg.time.delay(20)
+    # Mostrar mensaje "Get ready..."
+    font = pg.font.Font("assets\Michroma.ttf", 50)
+    text = font.render("Get ready...", True, (255, 255, 255))
+    screen.fill((0, 0, 0))
+    screen.blit(text, (200, 250))
+    pg.display.update()
+    pg.time.delay(1500)
+
+    pg.mixer.music.stop()
+    pg.mixer.music.load("assets\musicajuego.mp3")
+    pg.mixer.music.play(-1)
+    pg.mixer.music.set_volume(0.2)
