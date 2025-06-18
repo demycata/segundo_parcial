@@ -5,7 +5,7 @@ from funciones import *
 
 # Game Variables
 
-def updateGameScreen(window, CELLSIZE, grid, celdas_ya_disparadas, celdas_acertadas):
+def actualizar_tablero(window, CELLSIZE, grid, celdas_ya_disparadas, celdas_acertadas):
     # Dibuja solo la cuadrícula del jugador
     dibujar_Grilla(window, CELLSIZE, grid, celdas_ya_disparadas, celdas_acertadas)
     pg.display.update()
@@ -52,6 +52,6 @@ def start(screen, dificultad, CELLSIZE, ROWS, COLS):
                         print("Disparo fallido", PUNTOS)
         PUNTOS += verificar_vida_barcos(barcos)
         estado = verificar_estado_partida(barcos)         
-        updateGameScreen(screen, CELLSIZE, grid, celdas_ya_disparadas, celdas_acertadas)
+        actualizar_tablero(screen, CELLSIZE, grid, celdas_ya_disparadas, celdas_acertadas)
         if estado:
             break
