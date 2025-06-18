@@ -1,24 +1,29 @@
 import pygame
 
+#FONDO
 background = pygame.image.load("assets\Frame_00_delay-0.05s.png")
+background = pygame.transform.scale(background, (800, 600))
 cell = pygame.image.load("assets\Greentoken.png")
+#VISUAL AGUA
 agua = pygame.image.load("assets\Bluetoken.png")
+#VISUAL BARCO
 barco = pygame.image.load("assets\Redtoken.png")
+#BOTON START
 boton_start_img = pygame.image.load("assets\Botonplay.png")
 boton_start_img = pygame.transform.scale(boton_start_img, (140, 60))
 boton_start_hover_img = pygame.image.load("assets\Botonplayanimado.png")
 boton_start_hover_img = pygame.transform.scale(boton_start_hover_img, (140, 60))
-
+#BOTON LEVELS
 boton_levels_img = pygame.image.load("assets\Botonlevels.png")
 boton_levels_img = pygame.transform.scale(boton_levels_img, (140, 60))
 boton_levels_hover_img = pygame.image.load("assets\Botonlevelsanimado.png")
 boton_levels_hover_img = pygame.transform.scale(boton_levels_hover_img, (140, 60))
-
+#BOTON SCORES
 boton_scores_img = pygame.image.load("assets\Botonscores.png")
 boton_scores_img = pygame.transform.scale(boton_scores_img, (140, 60))
 boton_scores_hover_img = pygame.image.load("assets\Botonscoresanimado.png")
 boton_scores_hover_img = pygame.transform.scale(boton_scores_hover_img, (140, 60))
-
+#BOTON EXIT
 boton_exit_img = pygame.image.load("assets\Botonexit.png")
 boton_exit_img = pygame.transform.scale(boton_exit_img, (140, 60))
 boton_exit_hover_img = pygame.image.load("assets\Botonexitanimado.png")

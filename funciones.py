@@ -1,6 +1,5 @@
 
-import pygame as pg
-
+import pygame as pg 
 import random
 
 def inicializar_matriz(cantidad_filas:int, cantidad_columnas:int, valor_inicial:any) -> list:
@@ -173,7 +172,7 @@ def verificar_estado_partida(barcos):
     
 def transicion_get_ready(screen):
     from assets import background
-    fade = pg.Surface((1000, 1000))
+    fade = pg.Surface((800, 600))
     fade.fill((0, 0, 0))
     for alpha in range(0, 255, 10):
         fade.set_alpha(alpha)
@@ -193,7 +192,7 @@ def transicion_get_ready(screen):
     pg.mixer.music.load("assets\musicajuego.mp3")
     pg.mixer.music.play(-1)
     pg.mixer.music.set_volume(0.2)
-
+    
 def mostrar_puntos(puntos, display):
     fuente = pg.font.SysFont(None, 36)
     if puntos < 0:
@@ -202,3 +201,6 @@ def mostrar_puntos(puntos, display):
     else:
         texto = fuente.render(f'{puntos:04d}', True, (255, 255, 255))
     display.blit(texto, (50, 70))
+
+
+
