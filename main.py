@@ -16,10 +16,8 @@ clock = pygame.time.Clock()
 pygame.display.set_caption("BATTLESHIP PRO MAX")
 
 # Icono
-icon = pygame.image.load("assets\icono.png")
 pygame.display.set_icon(icon)
 
-# Musica
 # Creando la ventana
 screen_resolution = (config.SCREENWIDTH, config.SCREENHEIGHT)
 screen = pygame.display.set_mode((screen_resolution))

@@ -1,8 +1,11 @@
 import pygame
+import pygame.mixer as mixer
 
+mixer.init()
 #FONDO
 background = pygame.image.load("assets\Frame_00_delay-0.05s.png")
-background = pygame.transform.scale(background, (800, 600))
+background = pygame.transform.scale(background, (820, 600))
+
 cell = pygame.image.load("assets\Greentoken.png")
 #VISUAL AGUA
 agua = pygame.image.load("assets\Bluetoken.png")
@@ -45,3 +48,14 @@ boton_hard_img = pygame.transform.scale(boton_hard_img, (200, 60))
 boton_hard_hover_img = pygame.image.load("assets\Botonhardanimado.png")
 boton_hard_hover_img = pygame.transform.scale(boton_hard_hover_img, (200, 60))
 
+#
+sonido_agua = mixer.Sound("assets\Agua.mp3")
+sonido_barco = mixer.Sound("assets\Disparo.mp3")
+#ICONO SONIDO
+logo_sonidosi = pygame.image.load("assets/sonidosi.png")
+logo_sonidosi = pygame.transform.scale(logo_sonidosi, (40, 40))
+logo_sonidono = pygame.image.load("assets/sonidono.png")
+logo_sonidono = pygame.transform.scale(logo_sonidono, (40, 40))
+
+# Icono
+icon = pygame.image.load("assets\icono.png")

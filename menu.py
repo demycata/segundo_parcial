@@ -27,15 +27,14 @@ screen = pygame.display.set_mode((screen_resolution))
 # Bucle principal del juego-----------------------------------------------------------------------------
 # ...carga de imágenes y otros assets arriba...
 def menu():
+    from assets import logo_sonidono, logo_sonidosi
+
     #MUSICA
     muted = False
-    logo_sonidosi = pygame.image.load("assets\sonidosi.png")
-    logo_sonidosi = pygame.transform.scale(logo_sonidosi, (40, 40))
-    logo_sonidono = pygame.image.load("assets\sonidono.png")
-    logo_sonidono = pygame.transform.scale(logo_sonidono, (40, 40))
     mixer.music.load("assets\musicamenu.mp3")
     mixer.music.play(-1)
     mixer.music.set_volume(0.2)
+
     #FONDO
     frame_actual = 0
     N = 83
@@ -65,8 +64,6 @@ def menu():
                 if 5 <= mouse_pos[0] <= 145 and 175 <= mouse_pos[1] <= 235:
                     opcion = 2
                     select = True
-                    #transicion_get_ready()
-                    #jugar(screen, 1, config.CELLSIZE, config.ROWS, config.COLS)  # Llama a la función jugar() de main.py
                 # Botón Scores
                 if 5 <= mouse_pos[0] <= 145 and 250 <= mouse_pos[1] <= 310:
                     opcion = 3
