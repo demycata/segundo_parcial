@@ -51,6 +51,7 @@ def start(screen, dificultad, CELLSIZE, ROWS, COLS):
                         PUNTOS -= 1
                         print("Disparo fallido", PUNTOS)
         PUNTOS += verificar_vida_barcos(barcos)
+        mostrar_puntos(PUNTOS, screen)
         estado = verificar_estado_partida(barcos)         
         actualizar_tablero(screen, CELLSIZE, grid, celdas_ya_disparadas, celdas_acertadas)
         if estado:

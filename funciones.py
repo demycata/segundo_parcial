@@ -45,6 +45,10 @@ def generar_cordenas(grid, CELLSIZE):
 
 def dibujar_Grilla(display, cellsize, grid, celdas_ya_disparadas, celdas_acertadas):
     """Dibuja solo la cuadrícula del jugador en la pantalla"""
+    from assets import cell, agua, barco
+    cell = pg.transform.scale(cell, (cellsize, cellsize))
+    agua = pg.transform.scale(agua, (cellsize, cellsize))
+    barco = pg.transform.scale(barco, (cellsize, cellsize))
     start_x = 192
     start_y = 76
     for i in range(len(grid)):
@@ -52,11 +56,11 @@ def dibujar_Grilla(display, cellsize, grid, celdas_ya_disparadas, celdas_acertad
             pos_x = start_x + j * cellsize
             pos_y = start_y + i * cellsize
             if (pos_x, pos_y) in celdas_acertadas: # ROJO si ya estan disparadas
-                pg.draw.rect(display, 'red', (pos_x, pos_y, cellsize, cellsize), 1)
+                display.blit(barco, (pos_x, pos_y))
             elif (pos_x, pos_y) in celdas_ya_disparadas: # AZUL si ya estan disparadas
-                pg.draw.rect(display, 'blue', (pos_x, pos_y , cellsize, cellsize), 1)
+                display.blit(agua, (pos_x, pos_y))
             else:   # si no las pone en blanco
-                pg.draw.rect(display, 'green', (pos_x, pos_y, cellsize, cellsize), 1)
+                display.blit(cell, (pos_x, pos_y))
 
 def cords_barco(grid, tam_barco, cord, columnas, filas):
     """
@@ -189,3 +193,12 @@ def transicion_get_ready(screen):
     pg.mixer.music.load("assets\musicajuego.mp3")
     pg.mixer.music.play(-1)
     pg.mixer.music.set_volume(0.2)
+
+def mostrar_puntos(puntos, display):
+    fuente = pg.font.SysFont(None, 36)
+    if puntos < 0:
+        puntos = puntos * -1
+        texto = fuente.render(f'-{puntos:04d}', True, (255, 255, 255))
+    else:
+        texto = fuente.render(f'{puntos:04d}', True, (255, 255, 255))
+    display.blit(texto, (50, 70))

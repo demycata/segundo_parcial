@@ -1,7 +1,9 @@
 import pygame
 
 background = pygame.image.load("assets\Frame_00_delay-0.05s.png")
-
+cell = pygame.image.load("assets\Greentoken.png")
+agua = pygame.image.load("assets\Bluetoken.png")
+barco = pygame.image.load("assets\Redtoken.png")
 boton_start_img = pygame.image.load("assets\Botonstart.png")
 boton_start_img = pygame.transform.scale(boton_start_img, (140, 60))
 boton_start_hover_img = pygame.image.load("assets\Botonstartanimado.png")
