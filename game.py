@@ -98,14 +98,7 @@ def start(screen, dificultad, CELLSIZE, ROWS, COLS):
         actualizar_tablero(screen, CELLSIZE, grid, celdas_ya_disparadas, celdas_acertadas)
 
         if estado:
-            print("¡Has ganado! Puntos totales:", PUNTOS)
-            font = pg.font.Font(None, 50)
-            text = font.render(f"¡Has ganado! Puntos totales: {PUNTOS}", True, (255, 255, 255))
-            pg.draw.rect(screen, (0, 0, 0), (150, 265, 565, 70))
-            screen.blit(text, (160, 280))
-            pg.display.flip()
-            pg.time.delay(7000)
-            break
+            run = guardar_score(screen, PUNTOS)
 
         if muted:
             screen.blit(logo_sonidono, (0, 560))
@@ -113,6 +106,3 @@ def start(screen, dificultad, CELLSIZE, ROWS, COLS):
             screen.blit(logo_sonidosi, (0, 560))
             
         pg.display.flip()
-
-        if estado:
-            break

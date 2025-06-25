@@ -5,7 +5,7 @@ from menu import *
 from menu_levels import *
 import game
 import funciones
-
+from menu_score import *
 
 # Inicializar Pygame
 pygame.init()
@@ -46,6 +46,8 @@ while True:
             case 2:
                 funciones.transicion_get_ready(screen)
                 game.start(screen, dificult, config.CELLSIZE, config.ROWS, config.COLS)
+            case 3:
+                menu_score(screen)
         
 
     pygame.display.flip()

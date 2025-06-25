@@ -537,3 +537,23 @@ def get_legajo(legajos:list)-> int:
         else:
             print('ESE LEGAJO YA EXISTE\n')
     return legajo
+
+def leer_csv(archivo):
+    matriz = []
+
+    for linea in archivo:
+
+        linea = linea.rstrip('\n')
+        fila = []
+        valores = linea.split(',')
+
+        for valor in valores:
+
+            if valor.isdigit():
+                fila.append(int(valor))
+            else:
+                fila.append(valor)
+
+        matriz.append(fila)
+        
+    return matriz

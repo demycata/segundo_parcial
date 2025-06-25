@@ -204,3 +204,25 @@ def mostrar_puntos(puntos, display):
 
 
 
+def guardar_score(screen, PUNTOS):
+    name = ''
+    font = pg.font.Font(None, 50)
+    cuadro = pg.image.load('assets\cuadro.png')
+    run = True
+    while run:
+        screen.blit(cuadro, (100, 0))
+        text = font.render(f"{name}", True, (255, 255, 255))
+        screen.blit(text, (200, 300))
+        for event in pg.event.get():
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_BACKSPACE:
+                    name = name[0:-1] 
+                elif event.key == pg.K_RETURN:
+                    run = False
+                else:
+                    name += event.unicode
+        pg.display.flip()
+
+    with open('puntos.csv', 'a') as score:
+        score.write(f'{name},{PUNTOS}\n')
+    return False
